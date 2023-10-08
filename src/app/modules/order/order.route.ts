@@ -8,6 +8,11 @@ import { OrderController } from './order.controller';
 const router = express.Router();
 
 // API Endpoints
+router.get(
+  '/:id',
+  authGuard(ENUM_USER_ROLES.CUSTOMER, ENUM_USER_ROLES.ADMIN),
+  OrderController.getSingleOrder
+);
 
 router.get(
   '/',

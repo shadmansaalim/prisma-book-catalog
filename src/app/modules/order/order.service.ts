@@ -50,7 +50,21 @@ const getAllOrders = async (
   };
 };
 
+// GET Single Order Function
+const getSingleOrder = async (
+  orderId: string,
+  userId?: string
+): Promise<Order | null> => {
+  // Searching conditions
+  const whereConditions = userId ? { id: orderId, userId } : { id: orderId };
+
+  return await prisma.order.findUnique({
+    where: whereConditions,
+  });
+};
+
 export const OrderService = {
   createOrder,
   getAllOrders,
+  getSingleOrder,
 };

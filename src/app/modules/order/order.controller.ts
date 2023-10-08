@@ -59,7 +59,34 @@ const getAllOrders = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// Function to GET Single Order
+const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
+  // Getting authenticated user from request
+  const user = (req as any).user;
+
+  // Getting order id from params
+  const orderId = req.params.id;
+
+  let result = null;
+
+  // Checking whether user is CUSTOMER OR ADMIN, for customer will show if the order belongs to them
+  if (user.role === ENUM_USER_ROLES.CUSTOMER) {
+    result = await OrderService.getSingleOrder(orderId, user.id);
+  } else {
+    result = await OrderService.getSingleOrder(orderId);
+  }
+
+  // Sending API Response
+  sendResponse<Order>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Single Order retrieved successfully.',
+    data: result,
+  });
+});
+
 export const OrderController = {
   createOrder,
   getAllOrders,
+  getSingleOrder,
 };

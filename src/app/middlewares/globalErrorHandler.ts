@@ -10,7 +10,6 @@ import handleClientError from '../../errors/handleClientError';
 import handleValidationError from '../../errors/handleValidationError';
 import handleZodError from '../../errors/handleZodError';
 import { IGenericErrorMessage } from '../../interfaces/error';
-import { errorLogger } from '../../shared/logger';
 
 // Initializing defaults
 let statusCode: number = httpStatus.INTERNAL_SERVER_ERROR;
@@ -47,7 +46,7 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   // Consoling on development or else logging the errors
   config.env === 'development'
     ? console.log('Global Error Handler : ', error)
-    : errorLogger.error('globalErrorHandler ~ ', error);
+    : console.error('globalErrorHandler ~ ', error);
 
   // Checked whether error type is in our Error Handler Object otherwise handled as generic error
   if (Object.hasOwnProperty.call(errorLists, error.constructor.name)) {

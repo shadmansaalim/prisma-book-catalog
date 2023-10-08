@@ -18,9 +18,6 @@ const createOrder = async (
       userId: authUserId,
       orderedBooks: payload,
     },
-    include: {
-      user: true,
-    },
   });
 };
 
@@ -34,10 +31,7 @@ const getAllOrders = async (
     filters,
     paginationOptions,
     OrderConstants.searchableFields,
-    prisma.order,
-    OrderConstants.fieldsToInclude,
-    OrderConstants.relationalFields,
-    OrderConstants.relationalFieldsMapper
+    prisma.order
   );
 
   return {

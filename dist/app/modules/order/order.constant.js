@@ -5,16 +5,7 @@ exports.OrderConstants = void 0;
 const searchableFields = [];
 // Searching and Filtering  Fields
 const filterableFields = ['searchTerm', 'id', 'status', 'userId'];
-// Fields to populate in order data
-const fieldsToInclude = ['user'];
-const relationalFields = ['userId'];
-const relationalFieldsMapper = {
-    userId: 'user',
-};
 exports.OrderConstants = {
     searchableFields,
     filterableFields,
-    fieldsToInclude,
-    relationalFields,
-    relationalFieldsMapper,
 };

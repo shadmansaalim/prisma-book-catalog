@@ -23,15 +23,12 @@ const createOrder = (authUserId, payload) => __awaiter(void 0, void 0, void 0, f
             userId: authUserId,
             orderedBooks: payload,
         },
-        include: {
-            user: true,
-        },
     });
 });
 // GET All Orders
 const getAllOrders = (filters, paginationOptions) => __awaiter(void 0, void 0, void 0, function* () {
     // Getting all orders
-    const { page, limit, total, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, order_constant_1.OrderConstants.searchableFields, prisma_1.default.order, order_constant_1.OrderConstants.fieldsToInclude, order_constant_1.OrderConstants.relationalFields, order_constant_1.OrderConstants.relationalFieldsMapper);
+    const { page, limit, total, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, order_constant_1.OrderConstants.searchableFields, prisma_1.default.order);
     return {
         meta: {
             page,

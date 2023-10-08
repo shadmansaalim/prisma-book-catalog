@@ -11,6 +11,7 @@ const filterableFields = [
     'author',
     'genre',
     'publicationDate',
+    'categoryId',
 ];
 // Fields to populate in book data
 const fieldsToInclude = ['category'];

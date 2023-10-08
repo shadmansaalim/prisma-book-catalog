@@ -35,6 +35,10 @@ const createBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 const getAllBooks = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Making a filter options object
     const filters = (0, pick_1.default)(req.query, book_constant_1.BookConstants.filterableFields);
+    // Adding a categoryId filter if requested in params
+    if (req.params.categoryId) {
+        filters.categoryId = req.params.categoryId;
+    }
     // Making a pagination options object
     const paginationOptions = (0, pick_1.default)(req.query, pagination_1.PaginationConstants.fields);
     // Getting all books based on request

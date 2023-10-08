@@ -9,12 +9,22 @@ const router = express.Router();
 
 // API Endpoints
 router.get(
+  '/:categoryId/category',
+  authGuard(ENUM_USER_ROLES.CUSTOMER, ENUM_USER_ROLES.ADMIN),
+  BookController.getAllBooks
+);
+
+router.get(
   '/:id',
-  authGuard(ENUM_USER_ROLES.ADMIN),
+  authGuard(ENUM_USER_ROLES.CUSTOMER, ENUM_USER_ROLES.ADMIN),
   BookController.getSingleBook
 );
 
-router.get('/', authGuard(ENUM_USER_ROLES.ADMIN), BookController.getAllBooks);
+router.get(
+  '/',
+  authGuard(ENUM_USER_ROLES.CUSTOMER, ENUM_USER_ROLES.ADMIN),
+  BookController.getAllBooks
+);
 
 router.post(
   '/create-book',

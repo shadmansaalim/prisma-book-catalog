@@ -27,6 +27,11 @@ const getAllBooks = catchAsync(async (req: Request, res: Response) => {
   // Making a filter options object
   const filters = pick(req.query, BookConstants.filterableFields);
 
+  // Adding a categoryId filter if requested in params
+  if (req.params.categoryId) {
+    filters.categoryId = req.params.categoryId;
+  }
+
   // Making a pagination options object
   const paginationOptions = pick(req.query, PaginationConstants.fields);
 

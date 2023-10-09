@@ -10,13 +10,13 @@ const router = express.Router();
 // API Endpoints
 router.get(
   '/:id',
-  authGuard(ENUM_USER_ROLES.ADMIN),
+  authGuard(ENUM_USER_ROLES.CUSTOMER, ENUM_USER_ROLES.ADMIN),
   CategoryController.getSingleCategory
 );
 
 router.get(
   '/',
-  authGuard(ENUM_USER_ROLES.ADMIN),
+  authGuard(ENUM_USER_ROLES.CUSTOMER, ENUM_USER_ROLES.ADMIN),
   CategoryController.getAllCategories
 );
 

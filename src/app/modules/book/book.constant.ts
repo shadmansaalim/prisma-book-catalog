@@ -1,5 +1,5 @@
 // Searchable fields to GET books
-const searchableFields: string[] = [];
+const searchableFields: string[] = ['title', 'author', 'genre'];
 
 // Searching and Filtering  Fields
 const filterableFields = [
@@ -10,21 +10,15 @@ const filterableFields = [
   'genre',
   'publicationDate',
   'categoryId',
+  'minPrice',
+  'maxPrice',
 ];
 
 // Fields to populate in book data
 const fieldsToInclude = ['category'];
 
-const relationalFields: string[] = ['categoryId'];
-
-const relationalFieldsMapper: { [key: string]: string } = {
-  categoryId: 'category',
-};
-
 export const BookConstants = {
   searchableFields,
   filterableFields,
   fieldsToInclude,
-  relationalFields,
-  relationalFieldsMapper,
 };

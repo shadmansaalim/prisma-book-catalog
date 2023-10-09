@@ -22,15 +22,20 @@ const getAllBooks = async (
   filters: IBookFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<Book[]>> => {
+  // Converting strings to float
+  if (filters?.minPrice) {
+    filters.minPrice = parseFloat(filters.minPrice as string);
+  }
+  if (filters?.maxPrice) {
+    filters.maxPrice = parseFloat(filters.maxPrice as string);
+  }
   // Getting all books
-  const { page, limit, total, result } = await getAllDocuments<Book>(
+  const { page, limit, total, totalPage, result } = await getAllDocuments<Book>(
     filters,
     paginationOptions,
     BookConstants.searchableFields,
     prisma.book,
-    BookConstants.fieldsToInclude,
-    BookConstants.relationalFields,
-    BookConstants.relationalFieldsMapper
+    BookConstants.fieldsToInclude
   );
 
   return {
@@ -38,6 +43,7 @@ const getAllBooks = async (
       page,
       limit,
       total,
+      totalPage,
     },
     data: result,
   };

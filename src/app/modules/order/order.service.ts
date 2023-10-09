@@ -27,18 +27,20 @@ const getAllOrders = async (
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<Order[]>> => {
   // Getting all orders
-  const { page, limit, total, result } = await getAllDocuments<Order>(
-    filters,
-    paginationOptions,
-    OrderConstants.searchableFields,
-    prisma.order
-  );
+  const { page, limit, total, totalPage, result } =
+    await getAllDocuments<Order>(
+      filters,
+      paginationOptions,
+      OrderConstants.searchableFields,
+      prisma.order
+    );
 
   return {
     meta: {
       page,
       limit,
       total,
+      totalPage,
     },
     data: result,
   };

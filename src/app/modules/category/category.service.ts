@@ -20,18 +20,20 @@ const getAllCategories = async (
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<Category[]>> => {
   // Getting all categories
-  const { page, limit, total, result } = await getAllDocuments<Category>(
-    filters,
-    paginationOptions,
-    CategoryConstants.searchableFields,
-    prisma.category
-  );
+  const { page, limit, total, totalPage, result } =
+    await getAllDocuments<Category>(
+      filters,
+      paginationOptions,
+      CategoryConstants.searchableFields,
+      prisma.category
+    );
 
   return {
     meta: {
       page,
       limit,
       total,
+      totalPage,
     },
     data: result,
   };

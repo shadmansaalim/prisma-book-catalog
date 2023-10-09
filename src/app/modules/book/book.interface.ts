@@ -6,4 +6,6 @@ export type IBookFilters = {
   author?: string | undefined;
   genre?: string | undefined;
   publicationDate?: string | undefined;
+  minPrice?: string | number | undefined;
+  maxPrice?: string | number | undefined;
 };

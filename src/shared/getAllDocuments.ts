@@ -25,6 +25,7 @@ const getAllDocuments = async <T>(
   page: number;
   limit: number;
   total: number;
+  totalPage: number;
   result: T[];
 }> => {
   // Destructuring ~ Searching and Filtering
@@ -60,11 +61,25 @@ const getAllDocuments = async <T>(
             },
           };
         } else {
-          return {
-            [key]: {
-              equals: (filterData as any)[key],
-            },
-          };
+          if (key === 'minPrice') {
+            return {
+              price: {
+                gte: (filterData as any)[key],
+              },
+            };
+          } else if (key === 'maxPrice') {
+            return {
+              price: {
+                lte: (filterData as any)[key],
+              },
+            };
+          } else {
+            return {
+              [key]: {
+                equals: (filterData as any)[key],
+              },
+            };
+          }
         }
       }),
     });
@@ -115,10 +130,14 @@ const getAllDocuments = async <T>(
   // Total Documents in Database matching the condition
   const total = await model.count({ where: whereConditions });
 
+  // Total page count
+  const totalPage = Math.ceil(total / limit);
+
   return {
     page,
     limit,
     total,
+    totalPage,
     result,
   };
 };

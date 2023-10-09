@@ -19,12 +19,13 @@ const user_constant_1 = require("./user.constant");
 // GET All Users Function
 const getAllUsers = (filters, paginationOptions) => __awaiter(void 0, void 0, void 0, function* () {
     // Getting all rooms
-    const { page, limit, total, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, user_constant_1.UserConstants.searchableFields, prisma_1.default.user);
+    const { page, limit, total, totalPage, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, user_constant_1.UserConstants.searchableFields, prisma_1.default.user);
     return {
         meta: {
             page,
             limit,
             total,
+            totalPage,
         },
         data: result,
     };

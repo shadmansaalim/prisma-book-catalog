@@ -12,8 +12,8 @@ const category_controller_1 = require("./category.controller");
 // Express router
 const router = express_1.default.Router();
 // API Endpoints
-router.get('/:id', (0, authGuard_1.default)(user_1.ENUM_USER_ROLES.ADMIN), category_controller_1.CategoryController.getSingleCategory);
-router.get('/', (0, authGuard_1.default)(user_1.ENUM_USER_ROLES.ADMIN), category_controller_1.CategoryController.getAllCategories);
+router.get('/:id', (0, authGuard_1.default)(user_1.ENUM_USER_ROLES.CUSTOMER, user_1.ENUM_USER_ROLES.ADMIN), category_controller_1.CategoryController.getSingleCategory);
+router.get('/', (0, authGuard_1.default)(user_1.ENUM_USER_ROLES.CUSTOMER, user_1.ENUM_USER_ROLES.ADMIN), category_controller_1.CategoryController.getAllCategories);
 router.post('/create-category', (0, authGuard_1.default)(user_1.ENUM_USER_ROLES.ADMIN), category_controller_1.CategoryController.createCategory);
 router.patch('/:id', (0, authGuard_1.default)(user_1.ENUM_USER_ROLES.ADMIN), category_controller_1.CategoryController.updateSingleCategory);
 router.delete('/:id', (0, authGuard_1.default)(user_1.ENUM_USER_ROLES.ADMIN), category_controller_1.CategoryController.deleteSingleCategory);

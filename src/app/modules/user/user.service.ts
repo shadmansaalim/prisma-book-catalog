@@ -13,7 +13,7 @@ const getAllUsers = async (
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<User[]>> => {
   // Getting all rooms
-  const { page, limit, total, result } = await getAllDocuments<User>(
+  const { page, limit, total, totalPage, result } = await getAllDocuments<User>(
     filters,
     paginationOptions,
     UserConstants.searchableFields,
@@ -25,6 +25,7 @@ const getAllUsers = async (
       page,
       limit,
       total,
+      totalPage,
     },
     data: result,
   };

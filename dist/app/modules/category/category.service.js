@@ -25,12 +25,13 @@ const createCategory = (data) => __awaiter(void 0, void 0, void 0, function* () 
 // GET All Categories Function
 const getAllCategories = (filters, paginationOptions) => __awaiter(void 0, void 0, void 0, function* () {
     // Getting all categories
-    const { page, limit, total, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, category_constant_1.CategoryConstants.searchableFields, prisma_1.default.category);
+    const { page, limit, total, totalPage, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, category_constant_1.CategoryConstants.searchableFields, prisma_1.default.category);
     return {
         meta: {
             page,
             limit,
             total,
+            totalPage,
         },
         data: result,
     };

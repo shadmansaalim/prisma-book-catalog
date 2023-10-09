@@ -28,12 +28,13 @@ const createOrder = (authUserId, payload) => __awaiter(void 0, void 0, void 0, f
 // GET All Orders
 const getAllOrders = (filters, paginationOptions) => __awaiter(void 0, void 0, void 0, function* () {
     // Getting all orders
-    const { page, limit, total, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, order_constant_1.OrderConstants.searchableFields, prisma_1.default.order);
+    const { page, limit, total, totalPage, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, order_constant_1.OrderConstants.searchableFields, prisma_1.default.order);
     return {
         meta: {
             page,
             limit,
             total,
+            totalPage,
         },
         data: result,
     };

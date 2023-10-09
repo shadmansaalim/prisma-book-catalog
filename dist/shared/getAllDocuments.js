@@ -52,11 +52,27 @@ const getAllDocuments = (filters, paginationOptions, searchableFields, model, fi
                     };
                 }
                 else {
-                    return {
-                        [key]: {
-                            equals: filterData[key],
-                        },
-                    };
+                    if (key === 'minPrice') {
+                        return {
+                            price: {
+                                gte: filterData[key],
+                            },
+                        };
+                    }
+                    else if (key === 'maxPrice') {
+                        return {
+                            price: {
+                                lte: filterData[key],
+                            },
+                        };
+                    }
+                    else {
+                        return {
+                            [key]: {
+                                equals: filterData[key],
+                            },
+                        };
+                    }
                 }
             }),
         });
@@ -95,10 +111,13 @@ const getAllDocuments = (filters, paginationOptions, searchableFields, model, fi
     const result = yield model.findMany(baseQuery);
     // Total Documents in Database matching the condition
     const total = yield model.count({ where: whereConditions });
+    // Total page count
+    const totalPage = Math.ceil(total / limit);
     return {
         page,
         limit,
         total,
+        totalPage,
         result,
     };
 });

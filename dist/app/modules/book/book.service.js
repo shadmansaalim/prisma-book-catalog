@@ -27,13 +27,21 @@ const createBook = (data) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // GET All Books Function
 const getAllBooks = (filters, paginationOptions) => __awaiter(void 0, void 0, void 0, function* () {
+    // Converting strings to float
+    if (filters === null || filters === void 0 ? void 0 : filters.minPrice) {
+        filters.minPrice = parseFloat(filters.minPrice);
+    }
+    if (filters === null || filters === void 0 ? void 0 : filters.maxPrice) {
+        filters.maxPrice = parseFloat(filters.maxPrice);
+    }
     // Getting all books
-    const { page, limit, total, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, book_constant_1.BookConstants.searchableFields, prisma_1.default.book, book_constant_1.BookConstants.fieldsToInclude, book_constant_1.BookConstants.relationalFields, book_constant_1.BookConstants.relationalFieldsMapper);
+    const { page, limit, total, totalPage, result } = yield (0, getAllDocuments_1.default)(filters, paginationOptions, book_constant_1.BookConstants.searchableFields, prisma_1.default.book, book_constant_1.BookConstants.fieldsToInclude);
     return {
         meta: {
             page,
             limit,
             total,
+            totalPage,
         },
         data: result,
     };

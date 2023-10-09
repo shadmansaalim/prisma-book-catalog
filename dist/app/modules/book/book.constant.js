@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookConstants = void 0;
 // Searchable fields to GET books
-const searchableFields = [];
+const searchableFields = ['title', 'author', 'genre'];
 // Searching and Filtering  Fields
 const filterableFields = [
     'searchTerm',
@@ -12,17 +12,13 @@ const filterableFields = [
     'genre',
     'publicationDate',
     'categoryId',
+    'minPrice',
+    'maxPrice',
 ];
 // Fields to populate in book data
 const fieldsToInclude = ['category'];
-const relationalFields = ['categoryId'];
-const relationalFieldsMapper = {
-    categoryId: 'category',
-};
 exports.BookConstants = {
     searchableFields,
     filterableFields,
     fieldsToInclude,
-    relationalFields,
-    relationalFieldsMapper,
 };
